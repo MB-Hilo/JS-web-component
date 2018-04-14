@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Test Runner</title>
+    <link rel='stylesheet' href='style.css'/>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.4.1.css">
+  </head>
+  <body>
+      <div id="qunit"></div>
+      <div id="qunit-fixture"></div>
+    <section id="theme-list" class="themes-container" aria-label="popular themes">
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./js/components.js"></script>
+    <script src="./js/services.js"></script>
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/qunit/qunit-2.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/expect/1.20.2/expect.min.js"></script>
+    <script>
+      // Decided to go with QUnit as a test suite
+      // Failing tests can be seen on the page, click to collapse/expand
+      // and also the total results are in the browser console
+      // If only one or no tests running, click rerun tests link at top
+
+      //Create a total test results object
+      var allTests = {passed:0,failed:0,total:0,expected:3};
+
+      QUnit.module( "Test to see if tests are running" );
+      QUnit.test( "someThemeList == object", function( assert ) {
+
+          //assert.expect( 2 ); //expect two tests to run in this case
+          //assert.deepEqual( someThemesList,{}, "Passed, new object = object literal!" );
+
+          //check to see if our new themeList is initialized
+          assert.ok( typeof someThemesList === typeof themeList, "Both someThemeList and themeList are objects?" );
+      });
+
+      QUnit.module( "Object factory" );
+      QUnit.test( "themeList factory returns a deeply equal object", function( assert ) {
+
+          //check to see if our factory returns a themeList with all the same properties and methods
+          var aList = createThemeList("");
+          assert.deepEqual( aList,themeList, "createThemeList() returns a complete themeList component?" );
+      });
+
+      QUnit.module( "Services" );
+      QUnit.test( "service returns success", function( assert ) {
+
+          var done = assert.async();
+          getPopularThemes().done(function(data) {
+              assert.ok( data,"Passed! Service returned data" );
+              done();
+          }).fail(function(status) {
+              console.log(status.statusText);
+              assert.equal( status.statusText,"success","Failed to retrieve data!" );
+              done();
+          });
+      });
+
+      QUnit.module( "Functioning end-to-end" );
+      QUnit.test( "themeList is initialized,complete and running properly?", function( assert ) {
+
+          //check to see if a theme list initializes properly
+          var done = assert.async();
+
+          var aList = createThemeList("testList");
+          var aTarget = "#theme-list";
+
+          getPopularThemes().done(function(data) {
+              data = data.popular.items_last_week;
+              //initialize the themeList
+              assert.ok($(aTarget).length > 0,"DOM has the target ID?");
+              assert.equal(aList.initItems(aTarget, data),"success","Does the list initItems?");
+              assert.ok( aList.state.length > 0, "list has a state?" );
+              assert.equal( aList.componentID,"testList", "list has an ID?" );
+              assert.equal( aList.target,aTarget, "list has a DOM target?" );
+              assert.equal( typeof aList.initItems,typeof function(){}, "list has an initItems method?" );
+              assert.equal( typeof aList.render,typeof function(){}, "list has an render method?" );
+              assert.equal( typeof aList.remove,typeof function(){}, "list has an remove method?" );
+              assert.ok($(aTarget).find("ul").length > 0,"list added to the DOM?");
+
+              done();
+          });
+      });
+
+      QUnit.testDone( function( details ) {
+            var result = {
+                "Module name": details.module,
+                "Test name": details.name,
+                "Assertions": {
+                    "Total": details.total,
+                    "Passed": details.passed,
+                    "Failed": details.failed
+                },
+                "Skipped": details.skipped,
+                "Todo": details.todo,
+                "Runtime": details.runtime
+            };
+
+            allTests.passed += details.passed;
+            allTests.failed += details.failed;
+            allTests.total += details.total;
+
+            console.log( JSON.stringify( result, null, 2 ) );
+
+            if(allTests.total === allTests.expected){
+                QUnit.done(function() {
+                    console.log("Passed:",allTests.passed," Failed:", allTests.failed);
+                    if(allTests.total === allTests.passed) {
+                        console.log("Success, all tests passed! Total passed tests:",allTests.passed,"/",allTests.total);
+                    }else{
+                        console.log("Failed, some tests failed! Total passed tests:",allTests.passed,"/",allTests.total);
+                    }
+                });
+            }
+        } );
+
+    </script>
+  </body>
+</html>

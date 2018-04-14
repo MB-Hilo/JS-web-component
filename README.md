@@ -1,2 +1,4 @@
-# JS-web-component
-Example of a vanilla JS web component
+# Web component example
+
+- show what vanila JS can do as a web component
+- add some CSS effects

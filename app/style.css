@@ -1,0 +1,182 @@
+/*hand written, would have generated naming conventions from scss using nested classes and & operator */
+
+html {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #545454;
+}
+
+/*basic reset*/
+body {
+    margin: 0;
+}
+
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+
+p {
+    display: block;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    margin: 50px 0;
+}
+
+.market-header {
+    display: flex; /*fix for IE 11 centering*/
+    flex-direction: column;
+    width: 100%;
+}
+
+.market-header > section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 12.5%;
+}
+
+.top-header {
+    min-height: 50px;
+    background-color: black;
+    justify-content: space-between;
+}
+
+.sub-header {
+    height: 115px;
+    color: #537b20;
+    background-color: #f6f9f3;
+    border-bottom: 2px solid #d9d9d9;
+
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.market-logo {
+    padding-right: 40px;
+}
+
+.welcome-user {
+    font-size: 16px;
+    color: #FFF;
+}
+
+.intro-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-text p {
+    width:50%;
+    text-align: center;
+}
+
+.intro-text-link {
+    color: #0565ae;
+    text-decoration: none;
+}
+
+.themes-container {
+    margin: 0 10%;
+}
+
+.theme-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.theme-list-block {
+    display: flex;
+    align-items: center;
+
+    width: 420px;
+    height: 120px;
+    margin: 0 2.5% 50px 2.5%;
+    background-color: #e7e7e7;
+}
+
+.theme-list-block-details {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+}
+
+.theme-list-block-details > a {
+    color: #0565ae;
+    text-decoration: none;
+    padding-right: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.theme-list-block-image {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.theme-list-block-remove {
+    color: #c13635;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.five-star {
+    background-color: #f6f2ca;
+}
+
+
+@media (max-width: 1150px) {
+    .theme-list-block {
+        width: 45%;
+    }
+
+    .theme-list-block-details {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media (max-width: 850px) {
+    .theme-list-block {
+        width: 100%;
+    }
+
+    .theme-list-block-details {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .top-header {
+        min-height: 100px;
+        line-height: 10px;
+    }
+
+    .sub-header {
+        height: 60px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+}
+
+@media (min-width: 1350px) {
+    .theme-list-block {
+        width: 28%;
+    }
+
+    .themes-container {
+        margin: 0 10%;
+    }
+}

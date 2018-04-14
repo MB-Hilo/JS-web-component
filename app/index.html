@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Web component example</title>
+    <link rel='stylesheet' href='style.css'/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<header class="market-header">
+    <section class="top-header">
+        <a class="market-logo" href="http://market.com/" tabindex='1' aria-label="Market">
+            <img alt="Envato Market" class="global-header__logo" src="./images/logo.svg">
+        </a>
+        <strong class="welcome-user" tabindex="1">Welcome back, user!</strong>
+    </section>
+    <section class="sub-header">Popular Items</section>
+</header>
+
+<body>
+    <section class="intro-text">
+        <p>Here are this week's most popular themes & templates from <a class="intro-text-link" href="https://themeforest.net/" tabindex='2' aria-label="link to ThemeForest">ThemeForest!</a> Grab'em while they're hot!</p>
+    </section>
+
+    <section id="theme-list" class="themes-container" aria-label="popular themes">
+    </section>
+
+    <script src='./js/components.js'></script>
+    <script src='./js/services.js'></script>
+    <script src='script.js'></script>
+</body>
+
+</html>
